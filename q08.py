@@ -17,3 +17,18 @@
 ## ('9', ['A', 'B', 'C', 'E'])
 ##
 ##
+data = open('data.csv', 'r').readlines()
+data = [line[:-1] for line in data]
+data = [line.replace('\t', ',') for line in data]
+data = [line.replace(':', ',') for line in data]
+data = [line.replace(' ', ',') for line in data]
+data = [row.split(',') for row in data]
+terminos = [[row[1]] for row in data]
+terminos = ','.join([','.join(line) for line in terminos]).split(',')
+term = set(sorted(terminos))
+for t in sorted(term):
+    col0=[]
+    for row in data:
+        if row[1]==t:
+            col0.append(row[0])
+    print((t,sorted(col0)))
